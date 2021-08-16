@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AuthService } from '../utils/auth.service';
-import { UpdateProfile, UserCreateDTO } from './users.dto';
+import { UpdateProfile, UserCreateDTO, UserRoles } from './users.dto';
 
 @Injectable()
 export class UsersService {
@@ -39,4 +39,20 @@ export class UsersService {
 		return user
 	}
 
+	public async getById(userId: string): Promise<any> {
+		return await this.usersModel.findById(userId);
+	}
+
+	public async getAllList(): Promise<any> {
+	
+		return await this.usersModel.find({ role: UserRoles.CONTENT_WRITER });
+	}
+	public async CountAllList(): Promise<any> {
+		return await this.usersModel.countDocuments({ role: UserRoles.CONTENT_WRITER });
+	}
+
+
+	public async deleteById(userId: string): Promise<any> {
+		return await this.usersModel.findOneAndDelete({ _id: userId });
+	}
 }

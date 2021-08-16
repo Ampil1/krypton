@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './utils/jwt.strategy';
+import { BlogsModule } from './blogs/blogs.module';
 
 import * as dotenv from 'dotenv';
 
@@ -26,6 +27,7 @@ dotenv.config();
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({ secret: process.env.SECRET, signOptions: { expiresIn: '1d' } }),
     UsersModule,
+    BlogsModule,
 
   ],
   controllers: [AppController],

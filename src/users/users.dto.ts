@@ -2,7 +2,18 @@ import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString, Length, Max } from 'class-validator';
 
 
+export enum UserRoles {
+	ADMIN = 'ADMIN',
+	CONTENT_WRITER = 'CONTENT_WRITER',
+}
 
+export class AdminQuery {
+
+	@ApiModelProperty()
+	page?:number;
+	@ApiModelProperty()
+	limit?:number
+}
 export class ImageDTO {
 
 	@ApiModelProperty()
@@ -15,7 +26,16 @@ export class UserCreateDTO {
 	_id: string
 	@ApiModelProperty()
 	@IsString()
-	fullName: string;
+	firstName: string;
+    
+
+	@ApiModelProperty()
+	@IsString()
+	lastName: string;
+
+	@ApiModelProperty()
+	@IsString()
+	mobileNumber: string;
 
 	@ApiModelProperty()
 	@IsString()
@@ -32,26 +52,27 @@ export class UserCreateDTO {
 	@IsString()
 	@IsNotEmpty()
 	images: ImageDTO;
-
-	@ApiModelProperty()
-	@IsNotEmpty()
-	skills: [];
 	role?: string
 	salt?: string;
 }
 export class UpdateProfile {
 	_id: string
 	@ApiModelProperty()
-	fullName: string;
+	firstName: string;
+    
+	@ApiModelProperty()
+	lastName: string;
 
+	@ApiModelProperty()
+	mobileNumber: string
+    
+	
 	@ApiModelProperty()
 	password: string
 
 	@ApiModelProperty()
 	images: ImageDTO;
 
-	@ApiModelProperty()
-	skills: [];
 	salt?: string
 }
 
